@@ -16,7 +16,6 @@ public class ZImageLoader {
     ExecutorService mExecutorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
     private ZImageLoader() {
-
     }
 
     public static final ZImageLoader getInstance() {
