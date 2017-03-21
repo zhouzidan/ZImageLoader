@@ -3,6 +3,8 @@ package com.zhou.zimageloader;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.zhou.zimageloader.naming.FileNameGenerator;
+import com.zhou.zimageloader.naming.HashCodeFileNameGenerator;
 import com.zhou.zimageloader.utils.StorageUtil;
 
 import java.io.File;
@@ -14,33 +16,52 @@ import java.io.File;
  */
 
 public class AppInfo {
-    private static String packageName = null;//包名
-    private static String storagePath = null;//存储路径
+    private String packageName = null;//包名
+    private String storagePath = null;//存储路径
+    private FileNameGenerator mNameGenerator = null;//文件名加密
 
-    public static String getPackageName() {
+    private static AppInfo instance;
+
+    private AppInfo() {
+    }
+
+    public static AppInfo get() {
+        if (instance == null)
+            instance = new AppInfo();
+        return instance;
+    }
+
+    public String getPackageName() {
         return TextUtils.isEmpty(packageName) ? "" : packageName;
     }
 
-    public static void setPackageName(Context context) {
-        AppInfo.packageName = context.getPackageName();
+    public void setPackageName(Context context) {
+        this.packageName = context.getPackageName();
     }
 
-    public static String getStoragePath() {
+    public String getStoragePath() {
         return TextUtils.isEmpty(storagePath) ? "" : storagePath;
     }
 
-    public static void setStoragePath(String storagePath) {
-        AppInfo.storagePath = storagePath;
+    public void setStoragePath(String storagePath) {
+        this.storagePath = storagePath;
     }
 
     //图片的存储路径
-    public static void setStoragePath(Context context) {
+    public void setStoragePath(Context context) {
         File rootFile = StorageUtil.getInstance().getRootDir(context);
         if (rootFile != null) {
-            String storagePath = StorageUtil.getInstance().getRootDir(context).getPath();
-            setStoragePath(storagePath);
+            setStoragePath(rootFile.getPath());
         }
     }
 
+    public FileNameGenerator getNameGenerator() {
+        if (mNameGenerator == null)
+            mNameGenerator = new HashCodeFileNameGenerator();
+        return mNameGenerator;
+    }
 
+    public void setNameGenerator(FileNameGenerator nameGenerator) {
+        mNameGenerator = nameGenerator;
+    }
 }

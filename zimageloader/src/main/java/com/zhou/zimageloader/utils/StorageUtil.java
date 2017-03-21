@@ -36,7 +36,7 @@ public class StorageUtil {
                 if (root.exists() == false)
                     root.mkdirs();
             } else
-                root = context.getExternalFilesDir(null);
+                root = context.getExternalFilesDir("img");
         if (root == null || root.canWrite() == false)
             root = getCompleteDir(context, getOtherExtenalDir(context));
         if (root != null)

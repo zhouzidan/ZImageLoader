@@ -1,4 +1,4 @@
-package com.zhou.zimageloader;
+package com.zhou.zimageloader.caching;
 
 import android.graphics.Bitmap;
 import android.util.LruCache;
@@ -9,7 +9,7 @@ import android.util.LruCache;
  * LRU是Least Recently Used 近期最少使用算法  缓存管理
  */
 
-public class LruCacheMagager {
+public class LruCacheMagager implements CacheInterface {
     private static LruCacheMagager instance;
     LruCache<String, Bitmap> mBitmapLruCache;
 

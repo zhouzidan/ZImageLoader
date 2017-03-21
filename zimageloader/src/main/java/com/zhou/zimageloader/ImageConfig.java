@@ -3,9 +3,12 @@ package com.zhou.zimageloader;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.zhou.zimageloader.naming.FileNameGenerator;
+
 public class ImageConfig {
     private Context mContext;
     private String mStoragePath;
+    private FileNameGenerator mFileNameGenerator;
 
     public ImageConfig(Context context) {
         mContext = context;
@@ -16,10 +19,11 @@ public class ImageConfig {
     }
 
     public void build() {
-        AppInfo.setPackageName(mContext);
+        AppInfo.get().setPackageName(mContext);
         if (TextUtils.isEmpty(mStoragePath))
-            AppInfo.setStoragePath(mContext);
+            AppInfo.get().setStoragePath(mContext);
         else
-            AppInfo.setStoragePath(mStoragePath);
+            AppInfo.get().setStoragePath(mStoragePath);
+        AppInfo.get().setNameGenerator(mFileNameGenerator);
     }
 }
