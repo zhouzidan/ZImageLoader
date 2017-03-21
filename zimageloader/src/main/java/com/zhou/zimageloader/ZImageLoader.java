@@ -14,6 +14,7 @@ import java.util.concurrent.Executors;
 public class ZImageLoader {
     public static final String TAG = "ZImageLoader";
     private static ZImageLoader instance;
+    private ImageConfig mConfig;
     ExecutorService mExecutorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
     private ZImageLoader() {
@@ -26,7 +27,14 @@ public class ZImageLoader {
     }
 
     public void display(String imageUrl, ImageView imageView) {
+        if (mConfig == null)
+            throw new IllegalStateException("尚未初始化");
         mExecutorService.submit(new DisplayImageRunnable(imageUrl, imageView));
+    }
+
+    public void init(ImageConfig config) {
+        this.mConfig = config;
+        mConfig.build();
     }
 
 }
