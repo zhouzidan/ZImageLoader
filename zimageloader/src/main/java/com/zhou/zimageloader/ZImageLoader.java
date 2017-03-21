@@ -12,6 +12,7 @@ import java.util.concurrent.Executors;
  */
 
 public class ZImageLoader {
+    public static final String TAG = "ZImageLoader";
     private static ZImageLoader instance;
     ExecutorService mExecutorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 

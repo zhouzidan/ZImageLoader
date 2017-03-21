@@ -1,4 +1,4 @@
-package com.zhou.zimageloader;
+package com.zhou.zimageloader.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

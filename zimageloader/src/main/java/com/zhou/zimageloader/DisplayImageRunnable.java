@@ -1,15 +1,15 @@
 package com.zhou.zimageloader;
 
 import android.graphics.Bitmap;
-import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.zhou.zimageloader.utils.DownloadUtil;
+
 public class DisplayImageRunnable implements Runnable {
     private String imageUrl;
     private ImageView mImageView;
-    private Handler mHandler;
 
     public DisplayImageRunnable(String imageUrl, ImageView imageView) {
         this.imageUrl = imageUrl;
